@@ -33,7 +33,7 @@ _class: titlepage
 _footer: Photo by <a href="https://unsplash.com/@nosaka?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">nikko osaka</a> on <a href="https://unsplash.com/photos/brown-and-red-shipping-containers-WzZjyThDoR8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 _paginate: false
 -->
-![bg left:40%](https://raw.githubusercontent.com/dmikusa/container-deep-dive-slides/refs/heads/main/slides/img/nikko-osaka-WzZjyThDoR8-unsplash.jpg)
+![bg left:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/nikko-osaka-WzZjyThDoR8-unsplash.jpg)
 
 # Effortless Containerization with Cloud Native Buildpacks
 
@@ -82,12 +82,12 @@ While I'm not covering WiFi in this talk, if you're curious feel free to come ch
 
 <div class="center-img">
 
-![drop-shadow height:12em](https://raw.githubusercontent.com/dmikusa/container-deep-dive-slides/refs/heads/main/slides/img/qr-code.png)
+![drop-shadow height:12em](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/qr-code.png)
 
 </div>
 <div style="text-align: center; padding-top: 0.5em;">
 
-[https://github.com/dmikusa/container-deep-dive-slides]()
+[https://github.com/dmikusa/effortless-containerization-with-cnbs]()
 
 </div>
 
@@ -178,7 +178,7 @@ Technically:
 
 <div style="margin-top: 1.5em">
 
-![drop-shadow](https://raw.githubusercontent.com/dmikusa/buildpacks-for-ops/refs/heads/main/slides/img/buildpack-contents.png)
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/buildpack-contents.png)
 
 </div>
 
@@ -241,7 +241,7 @@ Buildpacks can be customized in a number of ways to fit your needs, but let's st
 _footer: Photo by <a href="https://unsplash.com/@punttim?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tim Gouw</a> on <a href="https://unsplash.com/photos/man-wearing-white-top-using-macbook-1K9T5YiZ2WU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 -->
 
-![bg right:40%](https://raw.githubusercontent.com/dmikusa/buildpacks-for-ops/refs/heads/main/slides/img/tim-gouw-1K9T5YiZ2WU-unsplash.jpg)
+![bg right:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/tim-gouw-1K9T5YiZ2WU-unsplash.jpg)
 
 # Problems Solved: Dockerfiles
 
@@ -306,7 +306,7 @@ The great thing about Buildpacks is that you don't have to hope. The buildpack a
 _footer: Photo by <a href="https://unsplash.com/@seanpollock?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sean Pollock</a> on <a href="https://unsplash.com/photos/low-angle-photo-of-city-high-rise-buildings-during-daytime-PhYq704ffdA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 -->
 
-![bg right:40%](https://raw.githubusercontent.com/dmikusa/buildpacks-for-ops/refs/heads/main/slides/img/sean-pollock-PhYq704ffdA-unsplash.jpg)
+![bg right:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/sean-pollock-PhYq704ffdA-unsplash.jpg)
 
 # Enterprise Ready
 
@@ -351,7 +351,7 @@ Spring Boot
 
 <div style="position: absolute; top: 250px; right: 100px; z-index: 10;">
 
-![drop-shadow width:7em](https://raw.githubusercontent.com/dmikusa/buildpacks-for-ops/refs/heads/main/slides/img/choose31.jpg)
+![drop-shadow width:7em](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/choose31.jpg)
 
 </div>
 
@@ -389,12 +389,12 @@ If you're a Spring Boot user, you're in luck! The Spring team provides Maven and
 
 <div class="center-img">
 
-![drop-shadow height:12em](https://raw.githubusercontent.com/dmikusa/buildpacks-for-ops/refs/heads/main/slides/img/qr-code.png)
+![drop-shadow height:12em](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/qr-code.png)
 
 </div>
 <div style="text-align: center; padding-top: 0.5em;">
 
-[https://github.com/dmikusa/buildpacks-for-ops]()
+[https://github.com/dmikusa/effortless-containerization-with-cnbs]()
 
 </div>
 
