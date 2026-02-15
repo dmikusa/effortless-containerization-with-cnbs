@@ -306,7 +306,7 @@ The great thing about Buildpacks is that you don't have to hope. The buildpack a
 _footer: Photo by <a href="https://unsplash.com/@seanpollock?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sean Pollock</a> on <a href="https://unsplash.com/photos/low-angle-photo-of-city-high-rise-buildings-during-daytime-PhYq704ffdA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 -->
 
-![bg right:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/sean-pollock-PhYq704ffdA-unsplash.jpg)
+![bg left:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/sean-pollock-PhYq704ffdA-unsplash.jpg)
 
 # Enterprise Ready
 
@@ -337,22 +337,20 @@ Most Users
 - [Install pack](https://buildpacks.io/docs/for-platform-operators/how-to/integrate-ci/pack/)
 - Run `pack build`
 
-</div>
-<div class="column">
+&nbsp;
 
 Spring Boot
 
 - https://start.spring.io/
-- `./mvnw spring-boot:build-image` or `./gradlew bootBuildImage`
-
+- `./mvnw spring-boot:build-image` 
+or `./gradlew bootBuildImage`
 
 </div>
+<div class="column center-img" style="margin-top: 1em;">
+
+![drop-shadow width:8em](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/choose31.jpg)
+
 </div>
-
-<div style="position: absolute; top: 250px; right: 100px; z-index: 10;">
-
-![drop-shadow width:7em](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/choose31.jpg)
-
 </div>
 
 <!--
@@ -365,11 +363,51 @@ If you're a Spring Boot user, you're in luck! The Spring team provides Maven and
 
 # Let's Build!
 
-// TODO: insert image or output of a typical build
+Run `./mvnw spring-boot:build-image`.
 
+![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-start.png) 
+
+<!--
+Ok, so let's walk through a build. To get things started, we'll kick off the build using Maven. The process would be very similar if we used Gradle. If using `pack`, it'll be similar too but with a couple differences that I'll note during the build.
+
+In this case, we see that Maven starts with a normal build compiling code & running your tests. Nothing new to see here.
+-->
 
 ---
-# 
+
+# Let's Build!
+
+Maven builds a JAR & starts buildpacks
+
+![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-jar-and-container-start.png) 
+
+---
+
+# Let's Build!
+
+Next creator starts. It analyzes & runs detect.
+
+![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-start.png) 
+
+---
+
+# Let's Build!
+
+Then buildpacks run!
+
+![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-runs.png) 
+
+---
+
+# Let's Build!
+
+Finally, an image is exported
+
+![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-exports.png) 
+
+---
+
+# Demos
 
 ---
 # 
