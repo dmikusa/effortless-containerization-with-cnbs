@@ -363,12 +363,12 @@ If you're a Spring Boot user, you're in luck! The Spring team provides Maven and
 
 # Let's Build!
 
-Run `./mvnw spring-boot:build-image`.
+Run `./mvnw spring-boot:build-image` to start the build.
 
 ![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-start.png) 
 
 <!--
-Ok, so let's walk through a build. To get things started, we'll kick off the build using Maven. The process would be very similar if we used Gradle. If using `pack`, it'll be similar too but with a couple differences that I'll note during the build.
+Ok, so let's walk through a build! To get things started, we'll kick off the build using Maven. The process would be very similar if we used Gradle. If using `pack`, it'll be similar too but with a couple differences that I'll note during the build.
 
 In this case, we see that Maven starts with a normal build compiling code & running your tests. Nothing new to see here.
 -->
