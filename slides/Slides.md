@@ -26,6 +26,9 @@ paginate    : true
     margin-left: auto;
     margin-right: auto;
 }
+.bold-selected li:last-child {
+  font-family: 'San Francisco bold';
+}
 </style>
 
 <!-- 
@@ -217,26 +220,35 @@ Paketo Buildpacks are an implementation of the Cloud Native Buildpacks specifica
 
 <div style="margin-top: 2em;">
 
-## None
-
 - Base images: <span style="font-family: San Francisco bold">Ubuntu Jammy</span>, <span style="font-family: San Francisco bold">Ubuntu Noble</span>, or <span style="font-family: San Francisco bold">UBI 8-10</span>
 - Four run image sizes: <span style="font-family: San Francisco bold">static, tiny, base & full</span>
-- Languages: <span style="font-family: San Francisco bold">Java, Java Native Image, Go, .NET, Node.js, Python, Ruby, Rust, & web servers</span>
-- Buildpack-less builders too
+- Languages: <span style="font-family: San Francisco bold">Java, GraalVM, Scala, Kotlin, Clojure, Go, .NET, Node.js, Python, Ruby, Rust, PHP & web servers</span>
+- Builders with and without buildpacks
 
 </div>
 
-<div style="position: absolute; top: 250px; right: 100px; z-index: 10;">
+<div style="position: absolute; top: 280px; right: 100px; z-index: 10;">
 
 ![drop-shadow width:7em](https://paketo.io/v2/images/logo-paketo-dark.svg)
 
 </div>
 
 <!--
-Buildpacks can be customized in a number of ways to fit your needs, but let's start by covering what you get out-of-the-box without any customization, simply by using the Paketo Buildpacks implementation.
+Paketo provides you with a complete set of everything you need to run Cloud Native buildpacks.
+
+This includes:
+
+- A choice of base images. These provide the foundation images used for your build and run environments. Paketo provides some choices so you can pick what works best for your company.
+
+- If using the Ubuntu images, we provide four different size run images. These are the images where your application will run. The four different sizes allow you to choose the base size of your application images and what will be included in those images.
+
+- Paketo provides support for a large number of popular languages.
+
+- Paketo provides builders. Builders are the image that you point your build tool too. It's essentially the combination of base images + a set of buildpacks. Paketo provides builders for each of the base image sets listed above and includes the supported set of buildpacks for each builder. We also ship what are called "buildpack-less" builders, which are the same base images but without any buildpacks. There are some special cases when you're customizing buildpacks, where these buildpack-less builders can be helpful.
 -->
 
 ---
+
 <!-- 
 _footer: Photo by <a href="https://unsplash.com/@punttim?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tim Gouw</a> on <a href="https://unsplash.com/photos/man-wearing-white-top-using-macbook-1K9T5YiZ2WU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 -->
@@ -363,9 +375,19 @@ If you're a Spring Boot user, you're in luck! The Spring team provides Maven and
 
 # Let's Build!
 
+
+<div class="columns">
+<div class="column">
+
 Run `./mvnw spring-boot:build-image` to start the build.
 
-![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-start.png) 
+</div>
+<div class="column center-img">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-start.png) 
+
+</div>
+</div>
 
 <!--
 Ok, so let's walk through a build! To get things started, we'll kick off the build using Maven. The process would be very similar if we used Gradle. If using `pack`, it'll be similar too but with a couple differences that I'll note during the build.
@@ -377,43 +399,163 @@ In this case, we see that Maven starts with a normal build compiling code & runn
 
 # Let's Build!
 
-Maven builds a JAR & starts buildpacks
 
-![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-jar-and-container-start.png) 
+<div class="columns">
+<div class="column">
+
+Maven builds a JAR &
+starts buildpacks
+
+</div>
+<div class="column">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-jar-and-container-start.png) 
+
+</div>
+</div>
+
+<!--
+After tests run, Maven will create a JAR file. The JAR file is used as input to the container build process with Paketo Buildpacks, and we can see the Cloud Native Buildpacks build start right after.
+
+The first thing you'll see the CNB build process do is to pull the required images. We see it pull a builder, a run image, and the lifecycle. It will optionally pull cache information, if it exists.
+-->
 
 ---
 
 # Let's Build!
+
+
+<div class="columns">
+<div class="column">
 
 Next creator starts. It analyzes & runs detect.
 
-![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-start.png) 
+</div>
+<div class="column">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-start-creator-and-detect.png) 
+
+</div>
+</div>
+
+<!--
+The next step is for the lifecycle to run. The lifecycle has two different modes in which it can run, and in this case we see it running creator which essentially runs all of the build steps in one container.
+
+The lifecycle runs through the five stages of Cloud Native buildpacks. On this screen, we can see the first three.
+
+1. Analyzing. In this stage, the lifecycle will look at the information that it has from previous runs. In this case, it's our first run so we don't see it doing anything.
+
+2. Next we see the detection step. This is where all of the detect executable runs for each of the buildpacks. Buildpacks' detection executables all run in parallel and each buildpack outputs what is called a build plan. When all of the buildpacks are done, the lifecycle reviews the build plans and using the rules defined in the CNB specification selects a build plan to execute. Conversely, if it cannot select a build plan that satisfies all the rules, then it will fail.
+
+3. Lastly, on this screen, we can see the restore stage. Information from analyze and detect is combined, and this is where metadata and cached layers are restored and made available to the next step: build.
+-->
 
 ---
 
 # Let's Build!
+
+
+<div class="columns">
+<div class="column">
 
 Then buildpacks run!
 
-![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-runs.png) 
+</div>
+<div class="column">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-runs.png) 
+
+</div>
+</div>
+
+<!--
+This is where the buildpacks actually run. It's called the "build" stage. In it you will see the selected buildpacks run in the order defined by their build plan. This is the build plan that was selected in the detect stage.
+
+The build packs run and get access to the application code as well as any information restored from previous runs.
+
+The buildpacks themselves do not actually create any OCI images or layers, instead, they are responsible for creating a directory structure on disk and populating it with the files and information used to create the final OCI image and all its layers. This makes authoring buildpacks much easier, as all a buildpack needs to do is create/move files around on disk.
+-->
 
 ---
 
 # Let's Build!
 
-Finally, an image is exported
+<div class="columns">
+<div class="column">
 
-![bg right:60%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-exports.png) 
+Lastly, an image is exported.
+
+</div>
+<div class="column">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-exports.png) 
+
+</div>
+</div>
+
+<!--
+The fifth and final stage of the lifecycle is to export the image. This process takes the specially crafted directory structure generated by the buildpacks and turns this into an OCI image. You can see in the output the image layers that are being created, and you can also see other metadata being written to the image, like labels.
+
+Finally, you'll see it write out the cache information that can be used by subsequent builds. This information does not end up in the application image though.
+-->
 
 ---
 
 # Demos
 
----
-# 
+<!--
+Run through the following demos:
+
+- Spring Boot app build from source
+- Spring Boot app build from jar and customization some settings like JVM version & vendor
+- Static HTTP apps
+- Python app, show how they’re all similar
+- Maybe something with a custom start command
+-->
 
 ---
-# 
+
+# Adoption Plan
+
+
+<div class="columns">
+<div class="column bold-selected">
+
+1. What languages do you 
+need to support?
+
+</div>
+<div class="column">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/language-word-cloud.png)
+
+</div>
+</div>
+
+
+<!--
+Now that we've seen Cloud Native buildpacks & Paketo in action, let's take a step back. When I'm preparing a new application, I have a set of a few questions I'll walk through to plan out the process.
+
+The first question is regarding programming languages that you need to support. I love Paketo, which supports Java, GraalVM, Scala, Kotlin, Clojure, .NET, Python, Node.js, Go, Rust, Ruby, PHP, and Web Servers. Make a list of the languages you need to support.
+
+If you need support for languages not in this, then you will want to check out the [Buildpack Registry](http://registry.buildpacks.io/), where you can look for existing buildpacks that support the languages you require. If you can't find any buildpacks that support your language, then you would need to create one to support that language or not use buildpacks for that language.
+-->
+
+---
+
+
+# Adoption Plan
+
+<div class="bold-selected">
+
+1. What languages do you need to support?
+2. What builder should you use? 
+
+</div>
+
+<!--
+Next, you'll want to select a builder.
+-->
 
 ---
 # 
