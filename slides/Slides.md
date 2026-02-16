@@ -517,7 +517,6 @@ Run through the following demos:
 
 # Adoption Plan
 
-
 <div class="columns">
 <div class="column bold-selected">
 
@@ -546,11 +545,18 @@ If you need support for languages not in this, then you will want to check out t
 
 # Adoption Plan
 
-<div class="bold-selected">
+<div class="columns">
+<div class="column bold-selected">
 
 1. What languages do you need to support?
 2. What builder should you use? 
 
+</div>
+<div class="column">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/which-builder.png)
+
+</div>
 </div>
 
 <!--
