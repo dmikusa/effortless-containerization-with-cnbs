@@ -577,28 +577,81 @@ For the time being, PHP apps do need full because of all their required OS level
 
 ---
 
+<div class="columns">
+<div class="column bold-selected" style="flex: 3">
+
+1. What languages do you need to support?
+2. What builder should you use?
+3. Do you need to add 
+OS packages?
+
+</div>
+<div class="column" style="flex: 4">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/more-packages.png)
+
+</div>
+</div>
+
+<!--
+Another common issue is needing to install additional OS packages. This often comes in the form of needing additional dev libraries, like for a database, which are not present in the base images.
+
+How you do this depends on your choice of base image. If you are using the Ubuntu base, then you can use the Paketo Apt buildpack. This buildpack is given an `Aptfile` with a list of packages to install. It will then install them into a buildpack layer and set env variables to make the packages accessible to your application. This is *NOT* installing them into the base layer, so this doesn't work for all packages but it does well with most things you need to install for buildpacks.
+
+If you're using the UBI base images, then it's a little trickier. You would need to make a custom image, as we do not presently offer an RPM buildpack.
+-->
+
+---
+
 # Adoption Plan
 
 <div class="columns">
 <div class="column" style="flex: 4">
 
-![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/more-packages.png)
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/tls-ca-certs.png)
 
 </div>
 <div class="column bold-selected" style="flex: 3">
 
 1. What languages do you need to support?
 2. What builder should you use?
-3. Do you need to add packages?
+3. Do you need to add 
+OS packages?
+4. Do you require Corporate CA Certs?
 
 </div>
 </div>
 
 <!--
+
 -->
 
 ---
-# 
+
+<div class="columns">
+<div class="column bold-selected" style="flex: 3">
+
+1. What languages do you need to support?
+2. What builder should you use?
+3. Do you need to add 
+OS packages?
+4. Do you require Corporate CA Certs?
+5. How to configure?
+
+</div>
+<div class="column" style="flex: 4">
+
+
+</div>
+</div>
+
+<!--
+Another common issue is needing to install additional OS packages. This often comes in the form of needing additional dev libraries, like for a database, which are not present in the base images.
+
+How you do this depends on your choice of base image. If you are using the Ubuntu base, then you can use the Paketo Apt buildpack. This buildpack is given an `Aptfile` with a list of packages to install. It will then install them into a buildpack layer and set env variables to make the packages accessible to your application. This is *NOT* installing them into the base layer, so this doesn't work for all packages but it does well with most things you need to install for buildpacks.
+
+If you're using the UBI base images, then it's a little trickier. You would need to make a custom image, as we do not presently offer an RPM buildpack.
+-->
 
 ---
 
