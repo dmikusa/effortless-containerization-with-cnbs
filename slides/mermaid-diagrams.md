@@ -23,3 +23,13 @@ graph TD
     J --> N[Base]
     J --> O[Full]
 ```
+
+## Do you need additional packages?
+
+```mermaid
+graph TD
+    P[More packages?] -- Yes --> A[Which base image?]
+    P[More Packages?] -- No --> D[Do nothing]
+    A[Which base image?] --> B[Ubuntu]
+    A --> C[RedHat UBI]
+```

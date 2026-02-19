@@ -401,13 +401,13 @@ In this case, we see that Maven starts with a normal build compiling code & runn
 
 
 <div class="columns">
-<div class="column">
+<div class="column" style="flex: 3">
 
 Maven builds a JAR &
 starts buildpacks
 
 </div>
-<div class="column">
+<div class="column" style="flex: 7">
 
 ![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-jar-and-container-start.png) 
 
@@ -426,12 +426,15 @@ The first thing you'll see the CNB build process do is to pull the required imag
 
 
 <div class="columns">
-<div class="column">
+<div class="column" style="flex: 3">
 
-Next creator starts. It analyzes & runs detect.
+Next creator starts. 
+
+It analyzes &
+ runs detect.
 
 </div>
-<div class="column">
+<div class="column" style="flex: 7">
 
 ![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-start-creator-and-detect.png) 
 
@@ -456,12 +459,12 @@ The lifecycle runs through the five stages of Cloud Native buildpacks. On this s
 
 
 <div class="columns">
-<div class="column">
+<div class="column" style="flex: 4">
 
 Then buildpacks run!
 
 </div>
-<div class="column">
+<div class="column" style="flex: 6">
 
 ![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-runs.png) 
 
@@ -481,12 +484,12 @@ The buildpacks themselves do not actually create any OCI images or layers, inste
 # Let's Build!
 
 <div class="columns">
-<div class="column">
+<div class="column" style="flex: 3">
 
 Lastly, an image is exported.
 
 </div>
-<div class="column">
+<div class="column" style="flex: 7">
 
 ![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/build-exports.png) 
 
@@ -520,8 +523,8 @@ Run through the following demos:
 <div class="columns">
 <div class="column bold-selected">
 
-1. What languages do you 
-need to support?
+1. What languages do you need
+to support?
 
 </div>
 <div class="column">
@@ -542,29 +545,57 @@ If you need support for languages not in this, then you will want to check out t
 
 ---
 
-
 # Adoption Plan
 
 <div class="columns">
-<div class="column bold-selected">
+<div class="column" style="flex: 4">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/which-builder.png)
+
+</div>
+<div class="column bold-selected" style="flex: 3">
 
 1. What languages do you need to support?
 2. What builder should you use? 
 
 </div>
-<div class="column">
+</div>
 
-![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/which-builder.png)
+<!--
+Next, you'll want to select a builder. If you're company uses RedHat base images, then you'll want to go with one of the UBI builders, 8, 9 or 10. If you want to use Ubuntu base images, then you'll want one of our Ubuntu base images, either Jammy or Noble. From there, there are four different sized images you can choose from based on your needs. Generally, the smaller images are better, but like most things in tech, it depends.
+
+Static is the smallest and works for Go & Rust apps. It only has CA certs & timezone data. It is around 5-8M.
+
+Tiny is a little larger, including CA certs, timezone data, libc/libgcc, libstdc++, zlib, and openssl/libssl. This is suitable for Java, GraalVM, Scala, Kotlin, Clojure, Go, Rust, and Node.js applications. It is around 16M.
+
+Base is larger but still quite reasonable. It includes all of time, more libraries, and is the smallest image that includes a shell. This is important to know for troubleshooting purposes. If you need to get into the container, then you need a shell. This image also includes `apt` so it works as a good base if you need to include additional libraries or packages. It supports languages Java, GraalVM, Scala, Kotlin, Clojure, .NET, Python, Node.js, Go, Rust, Ruby, and Web Servers. It is around 90M.
+
+Full is the largest image, and has way too much stuff in it. Last I looked, it weighed in around 1G. It is not recommended that you use full unless you absolutely have to. If base is missing something you need, then using base and adding a few packages is the recommended path. That will result in a much smaller image.
+
+For the time being, PHP apps do need full because of all their required OS level dependencies, however, the project is hoping to address this and support PHP on the base images.
+-->
+
+---
+
+# Adoption Plan
+
+<div class="columns">
+<div class="column" style="flex: 4">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/more-packages.png)
+
+</div>
+<div class="column bold-selected" style="flex: 3">
+
+1. What languages do you need to support?
+2. What builder should you use?
+3. Do you need to add packages?
 
 </div>
 </div>
 
 <!--
-Next, you'll want to select a builder.
 -->
-
----
-# 
 
 ---
 # 
