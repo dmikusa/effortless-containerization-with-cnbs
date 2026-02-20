@@ -250,12 +250,38 @@ This includes:
 ---
 
 <!-- 
+_footer: Photo by <a href="https://unsplash.com/@seanpollock?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sean Pollock</a> on <a href="https://unsplash.com/photos/low-angle-photo-of-city-high-rise-buildings-during-daytime-PhYq704ffdA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+-->
+
+![bg left:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/sean-pollock-PhYq704ffdA-unsplash.jpg)
+
+# Paketo is Enterprise Ready
+
+- Custom CA certificates
+- Proxies for Internet access
+- Local mirrors
+- Air Gapped Environments
+- SBOM Support
+
+<!--
+Buildpacks are Enterprise ready. Many enterprises need things like proxy support for access to the Internet, or possibly to support a custom CA cert chain because their network intercepts TLS traffic to decrypt it. Paketo Buildpacks supports all of this.
+
+Some companies may not allow internet access at all, or certain parts of the company network may be air gapped. In these cases, Paketo has two options for you. You may run a local mirror for dependencies and a local registry for images. Another option that Paketo supports is to bundle dependencies into your buildpack images and use a local registry for images.
+
+As supply chain issue increase, companies are investing more into provenance and SBOM support. Fortunately, for Paketo buildpacks you get that out-of-the-box. We'll see this more in the demos.
+-->
+
+---
+
+<!-- 
 _footer: Photo by <a href="https://unsplash.com/@punttim?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tim Gouw</a> on <a href="https://unsplash.com/photos/man-wearing-white-top-using-macbook-1K9T5YiZ2WU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 -->
 
 ![bg right:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/tim-gouw-1K9T5YiZ2WU-unsplash.jpg)
 
-# Problems Solved: Dockerfiles
+# What about Dockerfiles?
+
+## Common Problems
 
 - Dockerfile copy & paste
 - Dockerfile sprawl
@@ -275,7 +301,7 @@ Cloud Native buildpacks have no Dockerfiles, so this problem is gone. The knowle
 
 ---
 
-# Problems Solved: Best Practices
+# Dockerfiles: More problems...
 
 <div class="columns">
 <div class="column">
@@ -315,28 +341,12 @@ The great thing about Buildpacks is that you don't have to hope. The buildpack a
 ---
 
 <!-- 
-_footer: Photo by <a href="https://unsplash.com/@seanpollock?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sean Pollock</a> on <a href="https://unsplash.com/photos/low-angle-photo-of-city-high-rise-buildings-during-daytime-PhYq704ffdA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+_footer: Photo by <a href="https://unsplash.com/@bradencollum?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Braden Collum</a> on <a href="https://unsplash.com/photos/man-on-running-field-9HI8UJMSdZA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 -->
 
-![bg left:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/sean-pollock-PhYq704ffdA-unsplash.jpg)
+# Getting Started!
 
-# Enterprise Ready
-
-Paketo Buildpacks Support
-
-- Custom CA certificates
-- Proxies for Internet access
-- Local mirrors
-- Air Gapped Environments
-- SBOM Support
-
-<!--
-Buildpacks are Enterprise ready. Many enterprises need things like proxy support for access to the Internet, or possibly to support a custom CA cert chain because their network intercepts TLS traffic to decrypt it. Paketo Buildpacks supports all of this.
-
-Some companies may not allow internet access at all, or certain parts of the company network may be air gapped. In these cases, Paketo has two options for you. You may run a local mirror for dependencies and a local registry for images. Another option that Paketo supports is to bundle dependencies into your buildpack images and use a local registry for images.
-
-As supply chain issue increase, companies are investing more into provenance and SBOM support. Fortunately, for Paketo buildpacks you get that out-of-the-box. We'll see this more in the demos.
--->
+![bg left:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/braden-collum-9HI8UJMSdZA-unsplash.jpg)
 
 ---
 
@@ -769,6 +779,12 @@ Maven
 
 </div>
 </div>
+
+<!--
+In these examples, we're using our Spring Boot configurations to house the configuration for our builds. In the first example, we're using our `build.gradle` file. This is setting the builder and run image. In the second example, we're using our `pom.xml` to configure an environment variable for defining the Java version we want to use in our build.
+
+The Spring Boot Build Tools offer a wide variety of configuration options that you can use to configure the app, [with Gradle](https://docs.spring.io/spring-boot/maven-plugin/build-image.html) and [with Maven](https://docs.spring.io/spring-boot/gradle-plugin/packaging-oci-image.html).
+-->
 
 ---
 
