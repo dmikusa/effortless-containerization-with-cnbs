@@ -389,7 +389,7 @@ If you're a Spring Boot user, you're in luck! The Spring team provides Maven and
 <div class="columns">
 <div class="column">
 
-Run `./mvnw spring-boot:build-image` to start the build.
+Maven starts a normal build
 
 </div>
 <div class="column center-img">
@@ -525,6 +525,15 @@ Run through the following demos:
 - Python app, show how they’re all similar
 - Maybe something with a custom start command
 -->
+---
+
+<!-- 
+_footer: Photo by <a href="https://unsplash.com/@glenncarstenspeters?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Glenn Carstens-Peters</a> on <a href="https://unsplash.com/photos/person-writing-bucket-list-on-book-RLw-UC03Gwc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+-->
+
+# Adoption Plan
+
+![bg left:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg)
 
 ---
 
