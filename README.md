@@ -1,9 +1,9 @@
-# Container Deep Dive: Namespaces, Layers, and cgroups
+# Effortless Containerization with Cloud Native Buildpacks
 
-This repo contains my 'Container Deep Dive: Namespaces, Layers, and cgroups' slides and demos.
+This repo contains my 'Effortless Containerization with Cloud Native Buildpacks' slides.
 
 Links to the actual slides:
 
-- [HTML](./final/html/Slides.html)
+- [HTML](./final/Slides.html)
 - [PDF](./final/Slides.pdf)
 - [PPTX](./final/Slides.pptx)

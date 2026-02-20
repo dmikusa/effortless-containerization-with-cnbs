@@ -511,144 +511,6 @@ The fifth and final stage of the lifecycle is to export the image. This process 
 
 Finally, you'll see it write out the cache information that can be used by subsequent builds. This information does not end up in the application image though.
 -->
-
----
-
-# Demos
-
-<!--
-Run through the following demos:
-
-- Spring Boot app build from source
-- Spring Boot app build from jar and customization some settings like JVM version & vendor
-- Static HTTP apps
-- Python app, show how they’re all similar
-- Maybe something with a custom start command
--->
----
-
-<!-- 
-_footer: Photo by <a href="https://unsplash.com/@glenncarstenspeters?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Glenn Carstens-Peters</a> on <a href="https://unsplash.com/photos/person-writing-bucket-list-on-book-RLw-UC03Gwc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
--->
-
-# Adoption Plan
-
-![bg left:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg)
-
----
-
-# Adoption Plan
-
-<div class="columns">
-<div class="column bold-selected">
-
-1. What languages do you need
-to support?
-
-</div>
-<div class="column">
-
-![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/language-word-cloud.png)
-
-</div>
-</div>
-
-
-<!--
-Now that we've seen Cloud Native buildpacks & Paketo in action, let's take a step back. When I'm preparing a new application, I have a set of a few questions I'll walk through to plan out the process.
-
-The first question is regarding programming languages that you need to support. I love Paketo, which supports Java, GraalVM, Scala, Kotlin, Clojure, .NET, Python, Node.js, Go, Rust, Ruby, PHP, and Web Servers. Make a list of the languages you need to support.
-
-If you need support for languages not in this, then you will want to check out the [Buildpack Registry](http://registry.buildpacks.io/), where you can look for existing buildpacks that support the languages you require. If you can't find any buildpacks that support your language, then you would need to create one to support that language or not use buildpacks for that language.
--->
-
----
-
-# Adoption Plan
-
-<div class="columns">
-<div class="column" style="flex: 4">
-
-![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/which-builder.png)
-
-</div>
-<div class="column bold-selected" style="flex: 3">
-
-1. What languages do you need to support?
-2. What builder should you use? 
-
-</div>
-</div>
-
-<!--
-Next, you'll want to select a builder. If you're company uses RedHat base images, then you'll want to go with one of the UBI builders, 8, 9 or 10. If you want to use Ubuntu base images, then you'll want one of our Ubuntu base images, either Jammy or Noble. From there, there are four different sized images you can choose from based on your needs. Generally, the smaller images are better, but like most things in tech, it depends.
-
-Static is the smallest and works for Go & Rust apps. It only has CA certs & timezone data. It is around 5-8M.
-
-Tiny is a little larger, including CA certs, timezone data, libc/libgcc, libstdc++, zlib, and openssl/libssl. This is suitable for Java, GraalVM, Scala, Kotlin, Clojure, Go, Rust, and Node.js applications. It is around 16M.
-
-Base is larger but still quite reasonable. It includes all of time, more libraries, and is the smallest image that includes a shell. This is important to know for troubleshooting purposes. If you need to get into the container, then you need a shell. This image also includes `apt` so it works as a good base if you need to include additional libraries or packages. It supports languages Java, GraalVM, Scala, Kotlin, Clojure, .NET, Python, Node.js, Go, Rust, Ruby, and Web Servers. It is around 90M.
-
-Full is the largest image, and has way too much stuff in it. Last I looked, it weighed in around 1G. It is not recommended that you use full unless you absolutely have to. If base is missing something you need, then using base and adding a few packages is the recommended path. That will result in a much smaller image.
-
-For the time being, PHP apps do need full because of all their required OS level dependencies, however, the project is hoping to address this and support PHP on the base images.
--->
-
----
-
-<div class="columns">
-<div class="column bold-selected" style="flex: 3">
-
-1. What languages do you need to support?
-2. What builder should you use?
-3. Do you need to add 
-OS packages?
-
-</div>
-<div class="column" style="flex: 4">
-
-![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/more-packages.png)
-
-</div>
-</div>
-
-<!--
-Another common issue is needing to install additional OS packages. This often comes in the form of needing additional dev libraries, like for a database, which are not present in the base images.
-
-How you do this depends on your choice of base image. If you are using the Ubuntu base, then you can use the Paketo Apt buildpack. This buildpack is given an `Aptfile` with a list of packages to install. It will then install them into a buildpack layer and set env variables to make the packages accessible to your application. This is *NOT* installing them into the base layer, so this doesn't work for all packages but it does well with most things you need to install for buildpacks.
-
-If you're using the UBI base images, then it's a little trickier. You would need to make a custom image, as we do not presently offer an RPM buildpack.
--->
-
----
-
-# Adoption Plan
-
-<div class="columns">
-<div class="column" style="flex: 3">
-
-![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/tls-ca-certs.png)
-
-</div>
-<div class="column bold-selected" style="flex: 3">
-
-1. What languages do you need to support?
-2. What builder should you use?
-3. Do you need to add 
-OS packages?
-4. Do you require Corporate CA Certs?
-
-</div>
-</div>
-
-<!--
-Another common situation, especially at large companies, is to require the support of custom CA certificates when making connections to the Internet. These custom CA certificates are generated by your company and allow the company to intercept encrypted traffic, decrypt it, and monitor it. Because the company requires these custom CA certificates, if your connections do not trust them, then your connections will fail. This extends to buildpacks fetching dependencies for you from the Internet or even your application talking to other services on the Internet.
-
-Fortunately, this is something that Paketo Buildpacks supports. The ca-certificates buildpack will take your company's CA certificates and install them into the container for you. These are set up in a way that's compliant with OpenSSL, so any application that uses OpenSSL for it's TLS support will correctly pick up these CA certificates.
-
-One notable stand out that does not use OpenSSL is the JVM. The JVM maintains its own CA certificate lists. Because Paketo Buildpacks has great support for Java application, we have this case covered as well. If you are building a Java application, the Java buildpack will also pull in the CA certificates to the JVM's truststore, so the JVM will properly trust the CA certificates as well.
--->
-
 ---
 
 # Configuration
@@ -793,6 +655,171 @@ Maven
 In these examples, we're using our Spring Boot configurations to house the configuration for our builds. In the first example, we're using our `build.gradle` file. This is setting the builder and run image. In the second example, we're using our `pom.xml` to configure an environment variable for defining the Java version we want to use in our build.
 
 The Spring Boot Build Tools offer a wide variety of configuration options that you can use to configure the app, [with Gradle](https://docs.spring.io/spring-boot/maven-plugin/build-image.html) and [with Maven](https://docs.spring.io/spring-boot/gradle-plugin/packaging-oci-image.html).
+-->
+
+---
+
+# Demos
+
+<!--
+Run through the following demos:
+
+- Spring Boot app build from source
+- Spring Boot app build from jar and customization some settings like JVM version & vendor
+- Static HTTP apps
+- Python app, show how they’re all similar
+- Maybe something with a custom start command
+-->
+
+---
+
+<!-- 
+_footer: Photo by <a href="https://unsplash.com/@glenncarstenspeters?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Glenn Carstens-Peters</a> on <a href="https://unsplash.com/photos/person-writing-bucket-list-on-book-RLw-UC03Gwc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+-->
+
+# Adoption Plan
+
+![bg left:40%](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg)
+
+---
+
+# Adoption Plan
+
+<div class="columns">
+<div class="column bold-selected">
+
+1. What languages do you need
+to support?
+
+</div>
+<div class="column">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/language-word-cloud.png)
+
+</div>
+</div>
+
+
+<!--
+Now that we've seen Cloud Native buildpacks & Paketo in action, let's take a step back. When I'm preparing a new application, I have a set of a few questions I'll walk through to plan out the process.
+
+The first question is regarding programming languages that you need to support. I love Paketo, which supports Java, GraalVM, Scala, Kotlin, Clojure, .NET, Python, Node.js, Go, Rust, Ruby, PHP, and Web Servers. Make a list of the languages you need to support.
+
+If you need support for languages not in this, then you will want to check out the [Buildpack Registry](http://registry.buildpacks.io/), where you can look for existing buildpacks that support the languages you require. If you can't find any buildpacks that support your language, then you would need to create one to support that language or not use buildpacks for that language.
+-->
+
+---
+
+# Adoption Plan
+
+<div class="columns">
+<div class="column" style="flex: 4">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/which-builder.png)
+
+</div>
+<div class="column bold-selected" style="flex: 3">
+
+1. What languages do you need to support?
+2. What builder should you use? 
+
+</div>
+</div>
+
+<!--
+Next, you'll want to select a builder. If you're company uses RedHat base images, then you'll want to go with one of the UBI builders, 8, 9 or 10. If you want to use Ubuntu base images, then you'll want one of our Ubuntu base images, either Jammy or Noble. From there, there are four different sized images you can choose from based on your needs. Generally, the smaller images are better, but like most things in tech, it depends.
+
+Static is the smallest and works for Go & Rust apps. It only has CA certs & timezone data. It is around 5-8M.
+
+Tiny is a little larger, including CA certs, timezone data, libc/libgcc, libstdc++, zlib, and openssl/libssl. This is suitable for Java, GraalVM, Scala, Kotlin, Clojure, Go, Rust, and Node.js applications. It is around 16M.
+
+Base is larger but still quite reasonable. It includes all of time, more libraries, and is the smallest image that includes a shell. This is important to know for troubleshooting purposes. If you need to get into the container, then you need a shell. This image also includes `apt` so it works as a good base if you need to include additional libraries or packages. It supports languages Java, GraalVM, Scala, Kotlin, Clojure, .NET, Python, Node.js, Go, Rust, Ruby, and Web Servers. It is around 90M.
+
+Full is the largest image, and has way too much stuff in it. Last I looked, it weighed in around 1G. It is not recommended that you use full unless you absolutely have to. If base is missing something you need, then using base and adding a few packages is the recommended path. That will result in a much smaller image.
+
+For the time being, PHP apps do need full because of all their required OS level dependencies, however, the project is hoping to address this and support PHP on the base images.
+-->
+
+---
+
+<div class="columns">
+<div class="column bold-selected" style="flex: 3">
+
+1. What languages do you need to support?
+2. What builder should you use?
+3. Do you need to add 
+OS packages?
+
+</div>
+<div class="column" style="flex: 4">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/more-packages.png)
+
+</div>
+</div>
+
+<!--
+Another common issue is needing to install additional OS packages. This often comes in the form of needing additional dev libraries, like for a database, which are not present in the base images.
+
+How you do this depends on your choice of base image. If you are using the Ubuntu base, then you can use the Paketo Apt buildpack. This buildpack is given an `Aptfile` with a list of packages to install. It will then install them into a buildpack layer and set env variables to make the packages accessible to your application. This is *NOT* installing them into the base layer, so this doesn't work for all packages but it does well with most things you need to install for buildpacks.
+
+If you're using the UBI base images, then it's a little trickier. You would need to make a custom image, as we do not presently offer an RPM buildpack.
+-->
+
+---
+
+# Adoption Plan
+
+<div class="columns">
+<div class="column" style="flex: 3">
+
+![drop-shadow](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/tls-ca-certs.png)
+
+</div>
+<div class="column bold-selected" style="flex: 3">
+
+1. What languages do you need to support?
+2. What builder should you use?
+3. Do you need to add 
+OS packages?
+4. Do you require Corporate CA Certs?
+
+</div>
+</div>
+
+<!--
+Another common situation, especially at large companies, is to require the support of custom CA certificates when making connections to the Internet. These custom CA certificates are generated by your company and allow the company to intercept encrypted traffic, decrypt it, and monitor it. Because the company requires these custom CA certificates, if your connections do not trust them, then your connections will fail. This extends to buildpacks fetching dependencies for you from the Internet or even your application talking to other services on the Internet.
+
+Fortunately, this is something that Paketo Buildpacks supports. The ca-certificates buildpack will take your company's CA certificates and install them into the container for you. These are set up in a way that's compliant with OpenSSL, so any application that uses OpenSSL for it's TLS support will correctly pick up these CA certificates.
+
+One notable stand out that does not use OpenSSL is the JVM. The JVM maintains its own CA certificate lists. Because Paketo Buildpacks has great support for Java application, we have this case covered as well. If you are building a Java application, the Java buildpack will also pull in the CA certificates to the JVM's truststore, so the JVM will properly trust the CA certificates as well.
+-->
+
+---
+
+<!-- 
+_footer: Photo by <a href="https://unsplash.com/@simonkadula?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Simon Kadula</a> on <a href="https://unsplash.com/photos/a-factory-filled-with-lots-of-orange-machines-8gr6bObQLOI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+-->
+
+![bg right:40%](https://raw.githubusercontent.com/dmikusa/buildpacks-for-ops/refs/heads/main/slides/img/simon-kadula-8gr6bObQLOI-unsplash.jpg)
+
+# Automating App Builds
+
+## CI/CD Support
+
+- `pack` cli runs in some CI/CD systems like GitHub Actions
+- `kpack` can build on top of Kubernetes
+- CircleCI, Gitlab, Jenkins and Tekton are also supported
+- `lifecycle` direct
+
+<!--
+For some CI/CD systems, you can just run `pack` directly. For example, GitHub actions have a Docker Daemon available, so you can use pack to do builds.
+
+There are some CI/CD systems that run in containers, so don't have a Docker daemon (don't mess with Docker in Docker). These have specific integrations provided by the CNB project, CircleCI, Gitlab, Jenkins, and Tekton fall in this category.
+
+Finally, there are some CI/CD systems where you can pick the image in which your job will run. Concourse is like this. In this case, you can set the image for the job to be your builder image. Then you can invoke the lifecycle directly and it will execute the build. This is essentially what pack is doing for you, it creates a container with the builder and runs the lifecycle. In this case, the CI/CD system is creating the container and we manually invoke lifecycle to run the build.
+
+The only note with this last approach is that you will need to publish directly to the OCI registry, since there is no daemon. This can actually be faster though, so it's not necessarily a bad thing.
 -->
 
 ---
