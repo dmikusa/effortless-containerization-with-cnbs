@@ -229,8 +229,9 @@ Implementation
 </div>
 
 <!--
-Paketo Buildpacks are an implementation of the Cloud Native Buildpacks specification.
-// TODO: finish
+Paketo Buildpacks are an open-source implementation of the Cloud Native Buildpacks specification. The goal of the Paketo project is to provide a production-ready set of buildpacks for your favorite languages.
+
+As I mentioned, the Paketo buildpacks are written in Go for both speed and to have small static binaries. They are open-source and licensed under the Apache v2 license. The project itself is openly governed and part of the Cloud Foundry Foundation.
 -->
 
 ---
