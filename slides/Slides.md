@@ -100,6 +100,25 @@ Slides are available at the link above.
 
 ---
 
+# Feedback
+
+<div class="center-img">
+
+![drop-shadow height:12em](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/qr-feedback.png)
+
+</div>
+<div style="text-align: center; padding-top: 0.5em;">
+
+[https://confoo.ca/f/5FC1EB4350017769BFBA017EA1239A17]()
+
+</div>
+
+<!--
+Feedback can be left at this link. It's open for 1 hour after the talk.
+-->
+
+---
+
 # Why are we here today?
 
 <div class="columns margin3">
@@ -839,6 +858,25 @@ The only note with this last approach is that you will need to publish directly 
 
 <!--
 Slides are available at the link above.
+-->
+
+---
+
+# Feedback
+
+<div class="center-img">
+
+![drop-shadow height:12em](https://raw.githubusercontent.com/dmikusa/effortless-containerization-with-cnbs/refs/heads/main/slides/img/qr-feedback.png)
+
+</div>
+<div style="text-align: center; padding-top: 0.5em;">
+
+[https://confoo.ca/f/5FC1EB4350017769BFBA017EA1239A17]()
+
+</div>
+
+<!--
+Feedback can be left at this link. It's open for 1 hour after the talk.
 -->
 
 ---
